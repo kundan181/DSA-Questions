@@ -1,23 +1,21 @@
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
+ void solve(stack<int>&st,int count,int n){
+       //base case
+       if(count==n/2){
+          st.pop();
+          return ;
+       }
+       //store the value current element
+       int num = st.top();
+       //remove the curr element
+       st.pop();
+     //recurssive call for next iteration
+     solve(st,count+1, n);
+     //push the curr element back onto the stack
+     st.push(num);
+ } 
+void deleteMiddle(stack<int>&st, int N){
+	int cnt=0;
+   solve( st,cnt,N);
 
-void solve(stack<int>&inputStack, int count, int size){
-
-   //base case 
-   if(count == size/2){
-      inputStack.pop();
-      return;
-   }
-   int num = inputStack.top();
-   inputStack.pop();
-
-   //recursive call
-   solve(inputStack, count+1, size);
-   inputStack.push(num);
-}
-void deleteMiddle(stack<int>&inputStack, int N){
-	
-   // Write your code here
-   int count=0;
-   solve(inputStack,count,N);
-   
 }

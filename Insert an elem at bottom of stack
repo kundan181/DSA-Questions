@@ -1,3 +1,5 @@
+TC - O(N)
+
 #include <bits/stdc++.h>
 
 void solve(stack<int> &s, int x){

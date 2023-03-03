@@ -1,5 +1,5 @@
 TC = O(n)
-
+SC = O(h) h is the height of the BT
 public:
     pair<int,int> diameterFast(Node* root){
         //base case 

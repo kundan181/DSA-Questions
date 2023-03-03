@@ -1,0 +1,93 @@
+TC = O(n2) due to isbalanced + height function call simultaneously
+SC = O(h) h is ht of tree O(n) in worst case and n is the node in tree
+
+
+class Solution{
+    private:
+     int height(struct Node* node){
+        // code here 
+        //base case
+        if(node == NULL)
+            return 0;
+        int left = height(node->left);
+        int right = height(node->right);
+        
+        int ans = max(left,right) + 1;
+        return ans;
+    }
+    public:
+    //Function to check whether a binary tree is balanced or not.
+    bool isBalanced(Node *root)
+    {
+        
+        if(root == NULL)
+            return true;
+            
+        bool left = isBalanced(root->left);
+        bool right = isBalanced(root->right);
+        bool diff = abs(height(root->left) - height(root->right)) <= 1;
+        
+        if(left && right && diff)
+            return true;
+        return false;
+    }
+};
+
+
+###################################################################################################################################
+
+Optimal Solution 
+
+TC = O(n)
+SC = O(h)
+
+class Solution{
+    public:
+    //Function to check whether a binary tree is balanced or not.
+    pair<bool,int> isBalancedfast(Node *root)
+    {
+        //this is replaced with below code 
+        // if(root == NULL)
+        //     return true;
+            
+        // bool left = isBalanced(root->left);
+        // bool right = isBalanced(root->right);
+        // bool diff = abs(height(root->left) - height(root->right)) <= 1;
+        
+        
+        //base condition
+        if(root == NULL)
+        {
+            pair<bool,int> p = make_pair(true,0);
+            return p;
+        }
+        pair<int,int> left = isBalancedfast(root->left); //height ahe hya madhe
+        pair<int,int> right = isBalancedfast(root->right);
+        
+        bool leftAns = left.first; //hya madhe true or false store ahe jya tree madhun alya ahe
+        bool rightAns = right.first;
+        bool diff = abs(left.second - right.second) <= 1; // apan left.second ne height access karu shkato
+        pair<bool,int> ans; //hya madhe start la true ani false second la height
+        ans.second = max(left.second,right.second) + 1; //+1 ha root node sathi asto
+        
+        if(leftAns && rightAns && diff)
+        {
+            ans.first = true;
+        }
+        else
+        {
+            ans.first = false;
+        }
+        
+        return ans;
+        
+    }
+    bool isBalanced(Node *root)
+    {
+        return isBalancedfast(root).first;
+        
+    }
+};
+
+
+

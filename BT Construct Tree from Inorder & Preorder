@@ -1,3 +1,6 @@
+ TC = O(nlogn)
+ SC = O(h)
+ 
  class Solution{
 
   public:

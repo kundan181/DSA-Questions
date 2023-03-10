@@ -1,0 +1,69 @@
+ class Solution{
+
+  public:
+
+  Node* helper(int in[],int pre[],int ins,int ine,int pres,int pree){
+
+        if(ins > ine || pres > pree) {
+
+            return NULL;
+
+        }
+
+        int rootdata = pre[pres];
+
+        int pos;
+
+        for(int i=ins;i<=ine;i++) {
+
+          if( rootdata==in[i] ) {
+
+             pos = i;
+
+             break;
+
+          }    
+
+        }
+        int lins = ins;
+
+        int line = pos-1;
+
+        int lpres = pres+1;
+
+        int lpree = (line-lins) + lpres;
+
+        int rins = pos+1;
+
+        int rine = ine;
+
+        int rpres = lpree + 1;
+
+        int rpree = pree;
+
+        
+
+        Node *newNode = new Node(rootdata);
+
+        newNode->left = helper(in,pre,lins,line,lpres,lpree);
+
+        newNode->right = helper(in,pre,rins,rine,rpres,rpree);
+
+        return newNode;
+
+    }
+
+    Node* buildTree(int in[],int pre[], int n) {
+
+        int ins=0;
+
+        int pres=0;
+
+        int ine=n-1;
+
+        int pree=n-1;
+
+        return helper(in,pre,ins,ine,pres,pree); 
+
+    }
+};
